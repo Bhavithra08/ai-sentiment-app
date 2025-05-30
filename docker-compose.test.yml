@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  sentiment-app-test:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: sentiment-app-test
+    ports:
+      - "5000:5000"
+    restart: unless-stopped

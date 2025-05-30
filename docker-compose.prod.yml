@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  sentiment-app-prod:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: sentiment-app-prod
+    ports:
+      - "8000:5000"   # Mapping port 8000 on host to 5000 inside container
+    restart: always
