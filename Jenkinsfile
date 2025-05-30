@@ -16,7 +16,8 @@ pipeline {
 
         stage('Code Quality') {
             steps {
-               sh 'C:/SonarScanner/sonar-scanner-5.0.1.3006/bin/sonar-scanner.bat'
+                 withSonarQubeEnv('SonarQubeServer') {
+                    sh "${SCANNER_HOME}/bin/sonar-scanner"
             }
         }
 
