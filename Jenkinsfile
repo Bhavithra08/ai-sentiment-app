@@ -16,7 +16,7 @@ pipeline {
 
         stage('Code Quality') {
             steps {
-                sh 'sonar-scanner'
+               sh 'C:/SonarScanner/sonar-scanner-5.0.1.3006/bin/sonar-scanner.bat'
             }
         }
 
