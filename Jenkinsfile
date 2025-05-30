@@ -17,7 +17,7 @@ pipeline {
         stage('Code Quality') {
             steps {
                 withSonarQubeEnv('SonarQubeServer') {
-                    sh "${SCANNER_HOME}/bin/sonar-scanner"
+                    sh 'sonar-scanner'
                 }
             }
         }
