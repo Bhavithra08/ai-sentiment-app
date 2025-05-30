@@ -18,7 +18,7 @@ pipeline {
                withSonarQubeEnv('SonarQubeServer') {
                 script {
                          def scannerHome = tool 'SonarScanner'
-                         sh "${scannerHome}/bin/sonar-scanner"
+                         sh "\"${scannerHome.replace('\\', '/')}/bin/sonar-scanner\""
             }
         }
     }
