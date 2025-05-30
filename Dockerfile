@@ -13,7 +13,8 @@ COPY . .
 
 # Install dependencies
 RUN pip install --upgrade pip
-RUN pip install -r requirements.txt
+RUN pip install --default-timeout=100 --retries=5 -r requirements.txt
+
 
 # Create the database (optional: could also be done via entrypoint or Flask migration tool)
 # RUN python -c "import app.database as db; db.log_prediction('Init', 'Setup')"
