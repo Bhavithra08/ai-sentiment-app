@@ -13,14 +13,17 @@ pipeline {
                 sh 'docker run sentiment-app pytest tests/ --junitxml=results.xml'
             }
         }
-stage('Code Quality') {
-    steps {
-        withSonarQubeEnv('SonarQubeServer') {
-            def scannerHome = tool 'SonarScanner'
-            sh "${scannerHome}/bin/sonar-scanner"
+        stage('Code Quality') {
+            steps {
+               withSonarQubeEnv('SonarQubeServer') {
+                script {
+                         def scannerHome = tool 'SonarScanner'
+                         sh "${scannerHome}/bin/sonar-scanner"
+            }
         }
     }
 }
+
         stage('Security') {
             steps {
                 sh 'snyk test || true'
