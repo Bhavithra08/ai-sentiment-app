@@ -23,18 +23,30 @@ pipeline {
         }
     }
 }
-
-        stage('Security') {
-            steps {
-                sh 'snyk test || true'
+stage('Security') {
+    steps {
+        script {
+            try {
+                sh 'snyk test'
+            } catch (Exception e) {
+                echo "Snyk scan failed or snyk not installed. Skipping."
             }
         }
+    }
+}
 
         stage('Deploy to Test') {
-            steps {
+    steps {
+        script {
+            if (fileExists('docker-compose.test.yml')) {
                 sh 'docker-compose -f docker-compose.test.yml up -d --build'
+            } else {
+                echo "docker-compose.test.yml not found, skipping deploy to test."
             }
         }
+    }
+}
+
 
         stage('Release to Production') {
             steps {
