@@ -13,7 +13,7 @@ pipeline {
                 sh 'docker run sentiment-app pytest tests/ --junitxml=results.xml'
             }
         }
-
+]        
         stage('Code Quality') {
             steps {
                  withSonarQubeEnv('SonarQubeServer') {
