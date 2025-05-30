@@ -10,7 +10,7 @@ pipeline {
 
         stage('Test') {
             steps {
-                sh 'pytest tests/ --junitxml=results.xml'
+                sh 'docker run sentiment-app pytest tests/ --junitxml=results.xml'
             }
         }
 
