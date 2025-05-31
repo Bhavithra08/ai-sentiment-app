@@ -50,12 +50,17 @@ stage('Security') {
     }
 }
 
-        stage('Release to Production') {
-            steps {
-                sh 'docker-compose -f docker-compose.prod.yml up -d --build'
-            }
+stage('Release to Production') {
+    steps {
+        script {
+            // Remove existing container before deploying
+            sh '''
+                docker rm -f sentiment-app-prod || true
+                docker-compose -f docker-compose.prod.yml up -d --build --remove-orphans
+            '''
         }
-
+    }
+}
         stage('Monitoring') {
             steps {
                 sh 'echo "Monitoring simulated"'
